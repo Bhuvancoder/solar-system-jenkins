@@ -4,10 +4,9 @@ pipeline{
         nodejs 'NodeJs-24.11.1'
     }
     stages{
-        stage('node version'){
+        stage('Installing dependencies'){
             steps{
-                bat 'node -v'
-                bat 'npm -v'
+                bat 'npm install --no-audit'
             }
         }
     }
