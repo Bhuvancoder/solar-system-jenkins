@@ -18,12 +18,8 @@ pipeline{
                 }
                 stage('OWASP dependency Check'){
                    steps { 
-                    dependencyCheck additionalArguments: '', 
-                        odcInstallation: 'OWASP-DependencyCheck-10', 
-                        outdir: 'dependency-check-report', 
-                        scanpath: '.', 
-                        format: 'ALL'
-                    }
+                    dependencyCheck additionalArguments: '--scan . --out ./dependency-check-report --format ALL --prettyPrint', 
+                    odcInstallation: 'OWASP-DependencyCheck-10' }
                 }
             }  
         }
