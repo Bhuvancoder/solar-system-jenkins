@@ -9,18 +9,22 @@ pipeline{
                 bat 'npm install --no-audit'
             }
         }
-        stage('NPM dependency Audit'){
-            steps{
-                bat 'npm audit --audit-level=critical'
+        stage('Dependency Scanning'){
+            parallel{
+                stage('NPM dependency Audit'){
+                    steps{
+                        bat 'npm audit --audit-level=critical'
+                    }
+                }
+                stage('OWASP dependency Check'){
+                    steps{
+                        dependencyCheck additionalArguments: '''--scan \\\'./\\\'
+                            --out \\\'./\\\'
+                            --format \\\'ALL\\\'
+                            --prettyPrint''', odcInstallation: 'OWASP-DependencyCheck-10'
+                    }
+                }
             }
-        }
-        stage('OWASP dependency Check'){
-            steps{
-                dependencyCheck additionalArguments: '''--scan \\\'./\\\'
-                    --out \\\'./\\\'
-                    --format \\\'ALL\\\'
-                    --prettyPrint''', odcInstallation: 'OWASP-DependencyCheck-10'
-            }
-        }
+        }  
     }
 }
