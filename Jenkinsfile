@@ -14,5 +14,13 @@ pipeline{
                 bat 'npm audit --audit-level=critical'
             }
         }
+        stage('OWASP dependency Check'){
+            steps{
+                dependencyCheck additionalArguments: '''--scan \\\'./\\\'
+                    --out \\\'./\\\'
+                    --format \\\'ALL\\\'
+                    --prettyPrint''', odcInstallation: 'OWASP-DependencyCheck-10'
+            }
+        }
     }
 }
