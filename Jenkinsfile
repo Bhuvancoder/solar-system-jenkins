@@ -9,5 +9,10 @@ pipeline{
                 bat 'npm install --no-audit'
             }
         }
+        stage{
+            steps('NPM dependency Audit'){
+                bat 'npm audit --audit-level=critical'
+            }
+        }
     }
 }
