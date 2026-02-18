@@ -17,12 +17,12 @@ pipeline{
                     }
                 }
                 stage('OWASP dependency Check'){
-                    steps{
-                        dependencyCheck additionalArguments: '''--scan \\\'./\\\'
-                            --out \\\'./\\\'
-                            --format \\\'ALL\\\'
-                            --prettyPrint''', odcInstallation: 'OWASP-DependencyCheck-10'
-                    }
+                   steps { 
+                    dependencyCheck additionalArguments: '', 
+                        odcInstallation: 'OWASP-DependencyCheck-10', 
+                        outdir: 'dependency-check-report', 
+                        scanpath: '.', 
+                        format: 'ALL'
                 }
             }
         }  
