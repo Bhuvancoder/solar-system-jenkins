@@ -23,8 +23,9 @@ pipeline{
                         outdir: 'dependency-check-report', 
                         scanpath: '.', 
                         format: 'ALL'
+                    }
                 }
-            }
-        }  
+            }  
+        }
     }
-}
+}    
